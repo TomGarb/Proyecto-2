@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub de Juego</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="stars"></div>
+    <div style="position:absolute; top:10px; left:10px; z-index:999;">
+        <button id="btn-back-index" class="sw-btn" style="padding:10px; font-size:12px;">← CAMBIAR UNIVERSO</button>
+    </div>
+
+    <!-- PANTALLA 0: MENÚ PRINCIPAL -->
+    <div id="main-menu-screen" class="screen active">
+        <h1 class="sw-font" id="main-menu-title" style="color:var(--primary-color)">CARGANDO...</h1>
+        <h2>Selecciona tu Modo de Juego</h2>
+        
+        <div class="modes-grid">
+            <div class="class-card mode-card" id="btn-mode-story">
+                <h3>📜 MODO HISTORIA</h3>
+                <p>El desafío clásico. Enfrenta a 5 Jefes Secuenciales con curación entre rondas.</p>
+            </div>
+            <div class="class-card mode-card" id="btn-mode-endless">
+                <h3 style="color:var(--neon-green)">♾️ SUPERVIVENCIA</h3>
+                <p>Combates infinitos contra enemigos aleatorios que escalan. Sin curación externa.</p>
+            </div>
+            <div class="class-card mode-card" id="btn-mode-roguelike">
+                <h3 style="color:var(--neon-purple)">💎 CAMINO ROGUELIKE</h3>
+                <p>Al vencer a un jefe, elige un botín para mejorar tus estadísticas permanentes.</p>
+            </div>
+            <div class="class-card mode-card" id="btn-mode-dark">
+                <h3 style="color:var(--neon-red)">🌑 EL LADO OSCURO</h3>
+                <p>Extermina a los héroes del universo.</p>
+            </div>
+            <div class="class-card mode-card" id="btn-mode-draft" style="grid-column: span 2; justify-self: center;">
+                <h3 style="color:var(--highlight-color)" id="draft-title">⚔️ DRAFT TÁCTICO (5v5)</h3>
+                <p>Arma un escuadrón de 5 personajes y lucha tácticamente contra otros escuadrones.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANTALLA 1: CREACIÓN DE PERSONAJE (MODOS 1 AL 4) -->
+    <div id="creation-screen" class="screen hidden">
+        <h1 class="sw-font" id="creation-title">FORJA TU DESTINO</h1>
+        <p id="creation-subtitle">Selecciona tu clase para enfrentar el desafío.</p>
+        
+        <button id="btn-roll-destiny" class="sw-btn">🎲 SELECCIÓN ALEATORIA 🎲</button>
+
+        <div id="step-1" class="hidden creation-step">
+            <h3>Paso 1: Selecciona tu Clase Base</h3>
+            <div id="class-cards" class="cards-grid"></div>
+        </div>
+        <div id="step-2" class="hidden creation-step">
+            <h3>Paso 2: Elige tu Especialización (Subclase)</h3>
+            <div id="subclass-cards" class="cards-grid"></div>
+        </div>
+        <div id="step-3" class="hidden creation-step">
+            <h3>Paso 3: Elige tu Ataque Especial</h3>
+            <div id="special-cards" class="cards-grid"></div>
+        </div>
+    </div>
+
+    <!-- PANTALLA DE DRAFT (MODO 5) -->
+    <div id="draft-screen" class="screen hidden">
+        <h1 class="sw-font" style="color:var(--primary-color)">RECLUTAMIENTO TÁCTICO</h1>
+        <h2 id="draft-round-title">Ronda 1/5</h2>
+        
+        <button id="btn-roll-draft" class="sw-btn">🎲 TIRAR DADO DE RECLUTAMIENTO 🎲</button>
+        
+        <div id="draft-options" class="cards-grid hidden"></div>
+
+        <div class="roster-container">
+            <h3>Tu Escuadrón:</h3>
+            <div id="player-roster" class="roster-grid" style="display:flex; justify-content:center; gap:10px; margin-top:10px;"></div>
+        </div>
+    </div>
+
+    <script type="module" src="js/hub.js"></script>
+</body>
+</html>

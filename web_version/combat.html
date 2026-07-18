@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arena de Combate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="stars"></div>
+    <div style="position:absolute; top:10px; left:10px; z-index:999;">
+        <button id="btn-return-hub" class="sw-btn" style="padding:10px; font-size:12px; background:rgba(255,0,0,0.2);">← ABANDONAR COMBATE</button>
+    </div>
+
+    <!-- PANTALLA 2: COMBATE 1v1 (Modos 1 al 4) -->
+    <div id="battle-screen" class="screen hidden">
+        <h1 class="sw-font" id="battle-title">PREPÁRATE PARA EL COMBATE</h1>
+        
+        <div class="combat-grid" style="display:flex; justify-content:space-around; align-items:center; margin-top:30px;">
+            <!-- HÉROE -->
+            <div id="hero-panel" style="width:30%;">
+                <h2 id="hero-name" style="color:var(--primary-color)">Héroe</h2>
+                <div class="hp-bar-container">
+                    <div id="hero-hp-bar" class="hp-bar hero-hp" style="width:100%"></div>
+                </div>
+                <p><span id="hero-hp-current">100</span> / <span id="hero-hp-max">100</span> HP</p>
+                <div id="hero-status" class="status-container"></div>
+            </div>
+            
+            <h1 style="color:var(--highlight-color)">VS</h1>
+            
+            <!-- JEFE -->
+            <div id="boss-panel" style="width:30%;">
+                <h2 id="boss-name" style="color:var(--secondary-color)">Jefe</h2>
+                <div class="hp-bar-container">
+                    <div id="boss-hp-bar" class="hp-bar boss-hp" style="width:100%"></div>
+                </div>
+                <p><span id="boss-hp-current">100</span> / <span id="boss-hp-max">100</span> HP</p>
+                <div id="boss-status" class="status-container"></div>
+            </div>
+        </div>
+
+        <div id="action-panel" style="margin-top:30px;">
+            <button id="btn-attack" class="sw-btn">ATACAR</button>
+            <button id="btn-special" class="sw-btn">ESPECIAL</button>
+            <button id="btn-defend" class="sw-btn">DEFENDER</button>
+            <p id="hero-cooldown-text" style="color:red; font-weight:bold; margin-top:10px;"></p>
+        </div>
+
+        <div id="battle-log" class="battle-log" style="text-align:left; max-height:200px; overflow-y:auto; margin-top:20px; border:1px solid var(--border-color); padding:10px; border-radius:5px; background:rgba(0,0,0,0.5);">
+            <!-- Logs de batalla -->
+        </div>
+    </div>
+
+    <!-- PANTALLA 3: COMBATE TÁCTICO 5v5 (Modo Draft) -->
+    <div id="squad-battle-screen" class="screen hidden">
+        <h1 class="sw-font">BATALLA DE ESCUADRONES</h1>
+        <h2 id="squad-battle-round">Batalla de Supervivencia</h2>
+        
+        <div style="display:flex; justify-content:space-between; margin-top:20px; gap:20px;">
+            <div style="flex:1;">
+                <h3 style="color:var(--primary-color)">Tu Escuadrón</h3>
+                <div id="squad-hero-team" class="roster-grid"></div>
+            </div>
+            <div style="flex:1;">
+                <h3 style="color:var(--secondary-color)">Escuadrón Enemigo</h3>
+                <div id="squad-boss-team" class="roster-grid"></div>
+            </div>
+        </div>
+
+        <div id="squad-action-panel" style="margin-top:30px; opacity:0.5; pointer-events:none;">
+            <h3>Selecciona a un atacante y un objetivo y presiona:</h3>
+            <button id="btn-squad-attack" class="sw-btn">ATACAR OBJETIVO</button>
+            <button id="btn-squad-special" class="sw-btn">ESPECIAL</button>
+        </div>
+
+        <div id="squad-battle-log" class="battle-log" style="text-align:left; max-height:200px; overflow-y:auto; margin-top:20px; border:1px solid var(--border-color); padding:10px; border-radius:5px; background:rgba(0,0,0,0.5);">
+        </div>
+    </div>
+
+    <!-- PANTALLA 4: ROGUELIKE LOOT -->
+    <div id="loot-screen" class="screen hidden">
+        <h1 class="sw-font" style="color:var(--neon-purple)">BOTÍN DE VICTORIA</h1>
+        <h2>Elige una mejora permanente para la siguiente batalla:</h2>
+        <div id="loot-options" class="cards-grid"></div>
+    </div>
+
+    <!-- PANTALLA 5: RESULTADO FINAL -->
+    <div id="result-screen" class="screen hidden">
+        <h1 class="sw-font" id="result-title">RESULTADO</h1>
+        <p id="result-message"></p>
+        <button id="btn-restart" class="sw-btn" style="margin-top:20px;">VOLVER AL MENÚ</button>
+    </div>
+
+    <script type="module" src="js/combatApp.js"></script>
+</body>
+</html>
