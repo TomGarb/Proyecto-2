@@ -177,7 +177,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const draftOptionsDiv = document.getElementById('draft-options');
         draftOptionsDiv.innerHTML = '';
-        const selectedOptions = [...pool].sort(() => 0.5 - Math.random()).slice(0, 3);
+        
+        // Filtrar los personajes que ya están en el escuadrón del jugador
+        const availablePool = pool.filter(p => !playerSquad.some(sq => sq.name === p.name));
+        
+        const selectedOptions = [...availablePool].sort(() => 0.5 - Math.random()).slice(0, 3);
         
         selectedOptions.forEach(opt => {
             const card = document.createElement('div');

@@ -258,8 +258,10 @@ export function checkGameState1v1() {
 }
 
 export function showLootScreen() {
-    screens.battle.classList.add('hidden'); screens.battle.classList.remove('active');
-    screens.loot.classList.remove('hidden'); screens.loot.classList.add('active');
+    document.getElementById('battle-screen').classList.add('hidden'); 
+    document.getElementById('battle-screen').classList.remove('active');
+    document.getElementById('loot-screen').classList.remove('hidden'); 
+    document.getElementById('loot-screen').classList.add('active');
     
     const loots = [
         { name: "+25 HP Máximo", apply: () => { GameState.player.maxHp += 25; GameState.player.hp += 25; } },
@@ -279,8 +281,10 @@ export function showLootScreen() {
         card.innerHTML = `<h3>${loot.name}</h3>`;
         card.addEventListener('click', () => {
             loot.apply();
-            screens.loot.classList.add('hidden'); screens.loot.classList.remove('active');
-            screens.battle.classList.remove('hidden'); screens.battle.classList.add('active');
+            document.getElementById('loot-screen').classList.add('hidden'); 
+            document.getElementById('loot-screen').classList.remove('active');
+            document.getElementById('battle-screen').classList.remove('hidden'); 
+            document.getElementById('battle-screen').classList.add('active');
             startBattle1v1(GameState.currentBossIndex + 1);
         });
         lootCardsDiv.appendChild(card);
@@ -289,9 +293,23 @@ export function showLootScreen() {
 
 export function endGame(isVictory) {
     setTimeout(() => {
-        screens.battle.classList.add('hidden'); screens.battle.classList.remove('active');
-        screens.squadBattle.classList.add('hidden'); screens.squadBattle.classList.remove('active');
-        screens.result.classList.remove('hidden'); screens.result.classList.add('active');
+        const battleScreen = document.getElementById('battle-screen');
+        if (battleScreen) {
+            battleScreen.classList.add('hidden');
+            battleScreen.classList.remove('active');
+        }
+        
+        const squadBattleScreen = document.getElementById('squad-battle-screen');
+        if (squadBattleScreen) {
+            squadBattleScreen.classList.add('hidden');
+            squadBattleScreen.classList.remove('active');
+        }
+
+        const resultScreen = document.getElementById('result-screen');
+        if (resultScreen) {
+            resultScreen.classList.remove('hidden');
+            resultScreen.classList.add('active');
+        }
         
         const title = document.getElementById('result-title');
         const msg = document.getElementById('result-message');

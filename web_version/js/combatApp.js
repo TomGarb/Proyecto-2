@@ -9,7 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Hidratar el Estado desde sessionStorage
     const saga = sessionStorage.getItem('selectedSaga');
     const gameMode = sessionStorage.getItem('gameMode');
-    const playerDataRaw = sessionStorage.getItem('playerData');
+    
+    let playerDataRaw = null;
+    if (gameMode === 'draft') {
+        playerDataRaw = sessionStorage.getItem('playerSquad');
+    } else {
+        playerDataRaw = sessionStorage.getItem('playerConfig');
+    }
 
     if (!saga || !gameMode || !playerDataRaw) {
         window.location.href = 'index.html';
@@ -40,11 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Modos 1v1 (Story, Endless, Roguelike, Dark)
         GameState.player = playerData;
         
-        // Determinar qué enemigos usar
+        // Determinar qué enemigos usar (Si es Lado Oscuro, los jefes son los Héroes)
         if (gameMode === 'dark') {
-            GameState.currentBossDB = SagasData[saga].getHeroes();
+            GameState.currentBossDB = SagasData[saga].BOSSES_DARK;
         } else {
-            GameState.currentBossDB = SagasData[saga].getBosses();
+            GameState.currentBossDB = SagasData[saga].BOSSES_LIGHT;
         }
         
         GameState.endlessRound = 1;
@@ -60,9 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 4. Botón de Abandonar Combate (Físico en UI)
     document.getElementById('btn-return-hub').addEventListener('click', () => {
-        // Limpiamos los datos de la partida para no reanudarla, pero conservamos la saga
         sessionStorage.removeItem('gameMode');
-        sessionStorage.removeItem('playerData');
+        sessionStorage.removeItem('playerConfig');
+        sessionStorage.removeItem('playerSquad');
         window.location.href = 'hub.html';
     });
 
@@ -71,7 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnRestart) {
         btnRestart.addEventListener('click', () => {
             sessionStorage.removeItem('gameMode');
-            sessionStorage.removeItem('playerData');
+            sessionStorage.removeItem('playerConfig');
+            sessionStorage.removeItem('playerSquad');
             window.location.href = 'hub.html';
         });
     }
